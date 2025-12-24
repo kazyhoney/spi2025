@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年 スピリチュアル・自己啓発業界 YouTube分析レポート</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --soft-pink: #F8E8E8;
+            --dusty-rose: #C48B8B;
+            --rose-dark: #A66B6B;
+            --mauve: #8B6B6B;
+            --lavender: #E8E0F0;
+            --soft-purple: #9B7BB8;
+            --sage: #6B9B7B;
+            --sage-dark: #4A7B5B;
+            --mint: #E0F0E8;
+            --warm-beige: #E8DCD0;
+            --gold: #B8963C;
+            --gold-dark: #8B6B1C;
+            --text-dark: #2D2D2D;
+            --text-medium: #4A4A4A;
+            --text-light: #6B6B6B;
+            --white: #FFFFFF;
+            --coral: #C46B6B;
+            --coral-dark: #A04B4B;
+            --success: #4A8B5B;
+            --success-light: #E8F5E8;
+            --warning: #B8864A;
+            --border-light: #E8E0E0;
+            --link-color: #7B5BA0;
+            --link-hover: #5B3B80;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        header {
+            background: var(--soft-pink);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--dusty-rose);
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--rose-dark);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 2px solid var(--dusty-rose);
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--rose-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            color: var(--text-medium);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .summary-stat {
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--dusty-rose);
+            min-width: 120px;
+        }
+
+        .summary-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--rose-dark);
+        }
+
+        .summary-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        .tab-nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tab-nav-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            color: var(--rose-dark);
+            background: var(--soft-pink);
+        }
+
+        .tab-btn.active {
+            color: var(--rose-dark);
+            background: var(--soft-pink);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: var(--dusty-rose);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .tab-btn-icon {
+            font-size: 1.1rem;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--soft-pink);
+            border: 2px solid var(--dusty-rose);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .section-desc {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-left: 52px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid var(--dusty-rose);
+        }
+
+        .stat-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rose-dark);
+        }
+
+        .stat-card-label {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        .chart-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--border-light);
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--dusty-rose);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--soft-pink);
+            border: 2px solid var(--dusty-rose);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .category-info {
+            flex: 1;
+        }
+
+        .category-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .category-channels {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        .category-rank {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--white);
+        }
+
+        .category-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .category-stat {
+            background: var(--cream);
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .category-stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .category-stat-value.neutral {
+            color: var(--text-dark);
+        }
+
+        .category-stat-label {
+            font-size: 0.7rem;
+            color: var(--text-medium);
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+
+        .category-top-channel {
+            background: var(--cream);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .top-channel-label {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .top-channel-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .top-channel-name a {
+            color: var(--text-dark);
+        }
+
+        .top-channel-name a:hover {
+            color: var(--link-hover);
+        }
+
+        .top-channel-growth {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .warning-box {
+            background: #FFF8F8;
+            border: 3px solid var(--coral);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .warning-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--coral-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .warning-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .warning-content strong {
+            color: var(--coral-dark);
+        }
+
+        .warning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .warning-item {
+            background: var(--white);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--coral);
+        }
+
+        .warning-item h4 {
+            font-size: 0.95rem;
+            color: var(--coral-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .warning-item p {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .warning-item strong {
+            color: var(--coral-dark);
+            font-weight: 700;
+        }
+
+        .outlook-box {
+            background: #F8FFF8;
+            border: 3px solid var(--sage);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .outlook-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--sage-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .outlook-intro {
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .outlook-intro strong {
+            color: var(--sage-dark);
+        }
+
+        .outlook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .outlook-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-top: 4px solid var(--sage);
+            transition: transform 0.3s;
+        }
+
+        .outlook-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .outlook-item-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .outlook-item h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .outlook-item p {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .strategy-section {
+            background: var(--lavender);
+            border: 3px solid var(--soft-purple);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .strategy-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--soft-purple);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .strategy-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 2px solid var(--soft-purple);
+        }
+
+        .strategy-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--lavender);
+            border: 2px solid var(--soft-purple);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .strategy-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .strategy-list {
+            list-style: none;
+        }
+
+        .strategy-list li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .strategy-list li::before {
+            content: '✓';
+            color: var(--soft-purple);
+            font-weight: 700;
+        }
+
+        .ranking-section {
+            margin-bottom: 2rem;
+        }
+
+        .ranking-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--dusty-rose);
+        }
+
+        .ranking-list {
+            background: var(--white);
+            border-radius: 16px;
+            border: 2px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .ranking-item {
+            display: grid;
+            grid-template-columns: 50px 1fr auto auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.2s;
+        }
+
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+
+        .ranking-item:hover {
+            background: var(--soft-pink);
+        }
+
+        .ranking-position {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            background: var(--cream);
+            color: var(--text-medium);
+            border: 2px solid var(--border-light);
+        }
+
+        .ranking-position.gold {
+            background: #FFD700;
+            color: #5C4A00;
+            border-color: #CCA800;
+        }
+
+        .ranking-position.silver {
+            background: #C0C0C0;
+            color: #404040;
+            border-color: #909090;
+        }
+
+        .ranking-position.bronze {
+            background: #CD7F32;
+            color: #FFFFFF;
+            border-color: #A06028;
+        }
+
+        .ranking-info {
+            min-width: 0;
+        }
+
+        .ranking-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ranking-name a {
+            color: var(--text-dark);
+        }
+
+        .ranking-name a:hover {
+            color: var(--link-hover);
+        }
+
+        .ranking-category {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        .ranking-subs {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .ranking-growth {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--success);
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .ranking-growth.negative {
+            color: var(--coral-dark);
+        }
+
+        .external-link::after {
+            content: ' ↗';
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+
+        footer {
+            background: var(--white);
+            border-top: 2px solid var(--border-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            .summary-stats {
+                gap: 0.75rem;
+            }
+
+            .summary-stat {
+                padding: 0.75rem 1rem;
+                min-width: 100px;
+            }
+
+            .summary-stat-value {
+                font-size: 1.4rem;
+            }
+
+            .tab-btn {
+                padding: 0.75rem 1rem;
+                min-width: 100px;
+                font-size: 0.8rem;
+            }
+
+            .tab-btn-icon {
+                display: none;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .section-desc {
+                padding-left: 0;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ranking-item {
+                grid-template-columns: 40px 1fr auto;
+                padding: 0.75rem 1rem;
+            }
+
+            .ranking-subs {
+                display: none;
+            }
+
+            .overview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: animateIn 0.5s ease forwards;
+        }
+
+        @keyframes animateIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-badge">✨ 2025年度 年間レポート</div>
+        <h1>スピリチュアル・自己啓発業界<br>YouTube市場分析</h1>
+        <p class="header-subtitle">10カテゴリ・220チャンネルの登録者数推移を徹底分析</p>
+        <div class="summary-stats">
+            <div class="summary-stat">
+                <div class="summary-stat-value">220</div>
+                <div class="summary-stat-label">分析チャンネル</div>
+            </div>
+            <div class="summary-stat">
+                <div class="summary-stat-value">+491万</div>
+                <div class="summary-stat-label">年間増加数</div>
+            </div>
+            <div class="summary-stat">
+                <div class="summary-stat-value">85%</div>
+                <div class="summary-stat-label">成長率</div>
+            </div>
+            <div class="summary-stat">
+                <div class="summary-stat-value">10</div>
+                <div class="summary-stat-label">カテゴリ</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tab-nav">
+        <div class="tab-nav-inner">
+            <button class="tab-btn active" data-tab="overview"><span class="tab-btn-icon">📊</span>概要</button>
+            <button class="tab-btn" data-tab="categories"><span class="tab-btn-icon">🏆</span>カテゴリ分析</button>
+            <button class="tab-btn" data-tab="ai-impact"><span class="tab-btn-icon">⚠️</span>AI動画の影響</button>
+            <button class="tab-btn" data-tab="outlook"><span class="tab-btn-icon">🔮</span>2026年展望と戦略</button>
+            <button class="tab-btn" data-tab="ranking"><span class="tab-btn-icon">📋</span>登録者増加ランキング</button>
+        </div>
+    </nav>
+
+    <main>
+        <div id="overview" class="tab-content active">
+            <div class="section-title">
+                <div class="section-title-icon">📊</div>2025年 業界概況
+            </div>
+            <p class="section-desc">スピリチュアル・自己啓発関連YouTube業界の年間パフォーマンスサマリー</p>
+            <div class="overview-grid">
+                <div class="stat-card animate-in">
+                    <div class="stat-card-icon">📈</div>
+                    <div class="stat-card-value">+4,915,547</div>
+                    <div class="stat-card-label">年間総登録者増加数</div>
+                </div>
+                <div class="stat-card animate-in delay-1">
+                    <div class="stat-card-icon">✨</div>
+                    <div class="stat-card-value">187</div>
+                    <div class="stat-card-label">成長チャンネル数</div>
+                </div>
+                <div class="stat-card animate-in delay-2">
+                    <div class="stat-card-icon">📉</div>
+                    <div class="stat-card-value">31</div>
+                    <div class="stat-card-label">減少チャンネル数</div>
+                </div>
+                <div class="stat-card animate-in delay-3">
+                    <div class="stat-card-icon">💫</div>
+                    <div class="stat-card-value">22,343</div>
+                    <div class="stat-card-label">平均増加/チャンネル</div>
+                </div>
+            </div>
+            <div class="chart-card animate-in">
+                <div class="chart-title">📈 カテゴリ別 平均成長数ランキング（チャンネル数考慮）</div>
+                <div class="chart-wrapper"><canvas id="avgGrowthChart"></canvas></div>
+            </div>
+            <div class="chart-card animate-in">
+                <div class="chart-title">📅 業界全体 月別登録者増加推移</div>
+                <div class="chart-wrapper"><canvas id="monthlyTrendChart"></canvas></div>
+            </div>
+        </div>
+
+        <div id="categories" class="tab-content">
+            <div class="section-title">
+                <div class="section-title-icon">🏆</div>カテゴリ別分析
+            </div>
+            <p class="section-desc">各ジャンルのトップパフォーマーと成長動向（平均成長数順）</p>
+            <div class="category-grid" id="categoryGrid"></div>
+        </div>
+
+        <div id="ai-impact" class="tab-content">
+            <div class="section-title">
+                <div class="section-title-icon">⚠️</div>AI生成動画の影響
+            </div>
+            <p class="section-desc">業界に影響を与えるAIコンテンツの現状と対策</p>
+            <div class="warning-box animate-in">
+                <h3 class="warning-title">⚠️ AI生成動画の氾濫による成長鈍化</h3>
+                <p class="warning-content">
+                    2025年、AI生成動画の急増により、スピリチュアル・自己啓発業界全体で<strong>チャンネルごとの登録者数の伸びが鈍化</strong>しています。特に宇宙人、スピリチュアル系カテゴリでは、AI音声＋画像スライドショー形式の低品質コンテンツが大量に投稿され、オリジナルコンテンツの視聴機会が奪われる事態となっています。
+                </p>
+                <div class="warning-grid">
+                    <div class="warning-item">
+                        <h4>🤖 AI生成コンテンツの特徴</h4>
+                        <p>テキスト読み上げAI音声、ストック画像のスライドショー、テンプレート化された構成で大量生産。1チャンネルで月100本以上投稿するケースも。</p>
+                    </div>
+                    <div class="warning-item">
+                        <h4>📉 既存クリエイターへの影響</h4>
+                        <p>検索結果・おすすめの露出が分散し、オリジナルコンテンツへの到達が困難に。下半期の成長鈍化が顕著なチャンネルが増加。</p>
+                    </div>
+                    <div class="warning-item">
+                        <h4>🛡️ YouTubeの対応</h4>
+                        <p>2025年7月15日よりYPP（パートナープログラム）ポリシーを更新。「大量生産・反復的コンテンツ」の収益化を制限。AI開示ラベルの義務化も進行中。</p>
+                    </div>
+                    <div class="warning-item">
+                        <h4>📊 データに見る鈍化傾向</h4>
+                        <p>分析対象220チャンネル中、<strong>31チャンネル(14%)</strong>が年間でマイナス成長。下半期に成長率が低下したチャンネルが全体の<strong>約60%</strong>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card animate-in">
+                <div class="chart-title">📊 上半期 vs 下半期 成長比較</div>
+                <div class="chart-wrapper"><canvas id="halfYearChart"></canvas></div>
+            </div>
+        </div>
+
+        <div id="outlook" class="tab-content">
+            <div class="section-title">
+                <div class="section-title-icon">🔮</div>2026年の展望と戦略
+            </div>
+            <p class="section-desc">来年の予測と、クリエイターが取るべきアクション</p>
+            <div class="outlook-box animate-in">
+                <h3 class="outlook-title">🔮 2026年の市場予測</h3>
+                <p class="outlook-intro">AI動画生成技術はさらに進化し、<strong>2026年はAI生成動画がより一層増加</strong>する見込みです。Sora 2、Google Veo
+                    3.1などの登場により、映画品質のAI動画が容易に作成可能に。業界は「質vs量」の二極化が進むと予測されます。</p>
+                <div class="outlook-grid">
+                    <div class="outlook-item">
+                        <div class="outlook-item-icon">🎬</div>
+                        <h4>AI動画のさらなる高品質化</h4>
+                        <p>リアルタイム生成、インタラクティブ編集が可能に。人間と見分けがつかないAIアバターの登場。推定でマーケティング動画の75%がAI生成・支援に。</p>
+                    </div>
+                    <div class="outlook-item">
+                        <div class="outlook-item-icon">🏆</div>
+                        <h4>オリジナリティの価値上昇</h4>
+                        <p>顔出し・声出しの人間味あるコンテンツへの回帰。「本物の体験」「深い専門性」が差別化要因に。コミュニティ形成力が成長の鍵。</p>
+                    </div>
+                    <div class="outlook-item">
+                        <div class="outlook-item-icon">📋</div>
+                        <h4>プラットフォーム規制強化</h4>
+                        <p>AI生成コンテンツの開示義務のさらなる厳格化。「非本物コンテンツ」への収益化制限拡大。ディープフェイク検出ツールの普及。</p>
+                    </div>
+                    <div class="outlook-item">
+                        <div class="outlook-item-icon">🌐</div>
+                        <h4>グローバル展開の容易化</h4>
+                        <p>自動翻訳・吹替技術の進化で多言語展開が容易に。日本発スピリチュアルコンテンツの海外需要増加。</p>
+                    </div>
+                    <div class="outlook-item">
+                        <div class="outlook-item-icon">📈</div>
+                        <h4>成長が期待されるジャンル</h4>
+                        <p>都市伝説・日本の歴史（好調継続）、仏教・神道（実践的コンテンツ需要）、心理学（メンタルヘルス意識の高まり）</p>
+                    </div>
+                    <div class="outlook-item">
+                        <div class="outlook-item-icon">⚡</div>
+                        <h4>ショート動画の重要性</h4>
+                        <p>YouTube Shorts、TikTok、Instagramリールでの認知獲得。長編動画への誘導戦略が必須に。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="strategy-section animate-in">
+                <h3 class="strategy-title">💡 2026年に向けた推奨戦略</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="strategy-card-header">
+                            <div class="strategy-icon">🎯</div>
+                            <h4 class="strategy-card-title">コンテンツ差別化戦略</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>顔出し・声出しで人間味をアピール</li>
+                            <li>実体験・オリジナルストーリーを重視</li>
+                            <li>専門性の深堀り（ニッチ×深さ）</li>
+                            <li>AIには真似できない「温かみ」の演出</li>
+                            <li>リアルイベント・オフ会との連携</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-card-header">
+                            <div class="strategy-icon">💻</div>
+                            <h4 class="strategy-card-title">AI活用戦略（正しい使い方）</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>AIは「代替」ではなく「補助」として活用</li>
+                            <li>サムネイル・タイトル最適化にAI活用</li>
+                            <li>字幕生成・翻訳の効率化</li>
+                            <li>リサーチ・企画立案のサポートに</li>
+                            <li>編集作業の時短ツールとして</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-card-header">
+                            <div class="strategy-icon">👥</div>
+                            <h4 class="strategy-card-title">コミュニティ構築戦略</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>メンバーシップ・サブスク機能の活用</li>
+                            <li>ライブ配信での双方向コミュニケーション</li>
+                            <li>コメント返信・視聴者参加企画</li>
+                            <li>LINE・Discordでのコミュニティ形成</li>
+                            <li>ファンとの継続的な関係構築</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="strategy-card-header">
+                            <div class="strategy-icon">📱</div>
+                            <h4 class="strategy-card-title">マルチプラットフォーム戦略</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>YouTube Shortsでの新規獲得強化</li>
+                            <li>TikTok・Instagramとの連携</li>
+                            <li>ポッドキャスト展開（音声需要増）</li>
+                            <li>ブログ・noteでのSEO対策</li>
+                            <li>各プラットフォームの特性を活かす</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ranking" class="tab-content">
+            <div class="section-title">
+                <div class="section-title-icon">📋</div>登録者増加ランキング
+            </div>
+            <p class="section-desc">2025年の年間登録者増加数トップチャンネル（チャンネル名クリックでYouTubeへ）</p>
+            <div id="rankingContainer"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 スピリチュアル・自己啓発業界 YouTube市場分析レポート</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">データ収集期間: 2025年1月〜12月 | 分析対象: 220チャンネル / 10カテゴリ</p>
+    </footer>
+
+    <script>
+        // Channel ID mapping for YouTube links
+        const channelIds = {
+            "NoBorder / 溝口勇児": "UCk7YkjB08lzyUuLO2jUJmZw",
+            "Naokiman Show": "UC4lN5sizuJraSHqy99xTy6Q",
+            "哲理学作家さとうみつろう": "UC-N7pA0rR1PrUBOfs2OA0oA",
+            "コヤッキースタジオ": "UCmjOmXcwVXN3SOnW7tCO3vQ",
+            "TOLAND VLOG": "UCDvZpvrjCMfNDMasZEmkFuQ",
+            "羽賀ヒカル 神社チャンネル": "UCA_JrEDNSX96ADP6hh_7iUA",
+            "角由紀子のヤバイ帝国": "UCRWsPC7Tf_E4XjcMPe4EKlQ",
+            "秘密結社コヤミナティ": "UCJI0Zz7WomTTAx6lQw-HC_Q",
+            "占いTV Love Me Do": "UCL6F7R0unHipZwsXJ3hVHzg",
+            "ひすいこたろうの名言セラピー": "UCSV7XsNgbtIjK2sBLrhpZ4A",
+            "村主 悠真 / YUMA MURANUSHI": "UCzBPdVG5oHboUUjX8-6Q2RQ",
+            "5年後の世界": "UC0FkyfBoJXIIuQeZ9iurwNQ",
+            "佐藤航陽の宇宙会議": "UC3GpbpDEr8mp3ZZ8DDO65fg",
+            "Mindset Coaching Academy": "UCxeOH32jDFcRBV1D2lh7eFQ",
+            "苫米地英人の銀河系アカデミア": "UC3bc4PNLgnBudG19N74Jjzw",
+            "脳のリミッターを外すサトリ式コーチング": "UCK_aHj_Ooyg7sGV4GYQsz0g",
+            "ビジネスコーチングch 秦卓民": "UCorUZZI-dWCu3hop_hzgWzw",
+            "フェルミ漫画大学": "UC9V4eJBNx_hOieGG51NZ6nA",
+            "学識サロン": "UCC4NkFV-L-vVYD5z_Ei5dUA",
+            "サラタメさん": "UCaG7jufgiw4p5mphPPVbqhw",
+            "本要約チャンネル【毎日19時更新】": "UCEixleMT76xDzoiEb9ZA7XA",
+            "ハッピー研究所": "UCrAvEPdtrIdB-iCdOBLvlIQ",
+            "丸儲け住職": "UCTvgqlIYvoS9RDWlZspPydA",
+            "大愚和尚の一問一答": "UC4arQnli3ffEuCSrSgAD_Ug",
+            "三木大雲チャンネル": "UC7TxDj-DqbKzq9locL-iP2w",
+            "明母の樂行ライフ": "UChEnyMyS7RSUDTbpa50xZNQ",
+            "仏教に学ぶ幸福論 by 菊谷隆太": "UC2L2dBbBWuexPgOE4IdGu2g",
+            "むすび大学チャンネル": "UCAMT4hftbWt0kNK7PpKBgEg",
+            "香心華 心明 official": "UCpxZME3bqWHmAatOSOYgvOA",
+            "執行草舟チャンネル【公式】": "UCDCmm9RQ3NAlMsaDtKQUiOg",
+            "伊木ヒロシ": "UCb_a-fPfpri7C6-KrUrnk5Q",
+            "ゆとりくんチャンネル": "UC0ksmumBTu2gltpZpwksbcA",
+            "Paranoia_パラノイア【有益】": "UC0PotgTwYxbOZuM9FbWKdcg",
+            "きんまんの引き寄せホイホイ": "UCKud3SBtyRB45Yiij_EeC7g",
+            "内田博史【金持ちの習慣】": "UCYo5jkYvVZY7wGItoRELILg",
+            "大福まめこ MIRACLE CHANNEL": "UCxNqppp-Z4ABFeaqIljZRzw",
+            "mika宇宙CH": "UCZG8C9C8GDZCXuIQtkJJnCg",
+            "崔の店長日誌。": "UCCDBm5As0AtPlZ4P36WQ1NQ",
+            "スピリチュアル・リッチ三凛さとし": "UCzHVJmdBtmSonbhBfp4cD7Q",
+            "パワースポット一人旅": "UCtrEHywHaoXNeVaeccF__MA",
+            "だいちゃん先生の人生開華チャンネル": "UCaoKBrqrmJ6HTak__VLeA1Q",
+            "思考の学校 大石洋子": "UCItw50IoBdl7nZgZsK-66mg",
+            "シークエンスはやともチャンネル": "UCZnndFCPnK1EC2PERlGvwOA",
+            "沖縄霊能者ユタ片山 鶴子たづこ": "UCV3bfNsHiOa0EeFt9rDVr1Q",
+            "プロ霊能力者チャンネル": "UC2NQajHz-1eJrobTub1ZnSA",
+            "えしまなおこの鳳凰ちゃんねる": "UCzlpXMSMQ42Hxw_Ydg37Q-w",
+            "みろくマインド": "UCLcl5uLW6W1LjeQKJhFy4Xg",
+            "サイトウさんの毎日心理学チャンネル": "UCq1cKXce5VFXG-nX8DBkTWQ",
+            "ココヨワチャンネル": "UCoBuFNBnXadVKDyWKFXxE5Q",
+            "こころのケア研究所": "UCsPGPzbbBXRNlrV99fO9MxA",
+            "心理カウンセラー橋本翔太": "UCiFpKFt3RNKnmTLOPFibOAQ",
+            "心理カウンセラー るろうに": "UC_yZ9_c9mRjp8IvUjszlDmw",
+            "心理カウンセラー 衛藤信之": "UCUuihBLgcL1v9Raof4r2JbA",
+            "Spiritual mind メイの宇宙啓示": "UChe1pHb029mE9PKt8IOTpMA",
+            "コバシャールくんの宇宙人通信": "UCLQjJbthlzuuKsr4tpxnVjw",
+            "ルナの銀河啓示録": "UCP4RU_3ydXCuXHmoiGln9Nw",
+            "宇宙アセンションラジオ": "UCZGrQURBiBr95YSkfWsc83g",
+            "ギンガの真理": "UCYDuC79evh4laOet4PCy6Dw",
+            "StarSeedChannel": "UCbTpa2c-Q05uRPtLm0MJgpw",
+            "愛と感謝の33次元channel": "UClRWS5Cs_1sDtRRz2R9tB4Q",
+            "愛と笑いの宇宙法則ちゃんねる": "UCHiFBvAAjs3fVm9aRuGL8Gw",
+            "スピの秘密": "UCsc0N8Tg3MiRB33gWMDccXQ",
+            "Sunny & Zia スピリチュアルダイアリーCH": "UCV-XT71n19zhUQU834Hec6g",
+            "スピの羽【ゆっくり解説】": "UCvls2_cTpOmq_4oAcyPctRw"
+        };
+
+        function getChannelUrl(name) {
+            const id = channelIds[name];
+            return id ? `https://www.youtube.com/channel/${id}` : null;
+        }
+
+        function createChannelLink(name) {
+            const url = getChannelUrl(name);
+            return url ? `<a href="${url}" target="_blank" rel="noopener noreferrer" class="external-link">${name}</a>` : name;
+        }
+
+        // Industry Data
+        const industryData = {
+            categories: [
+                {
+                    name: "都市伝説・日本の歴史", icon: "🏯", totalGrowth: 1816300, channels: 18, growing: 16, declining: 2, avgGrowth: 100905,
+                    monthlyTotals: [85500, 179200, 123900, 109800, 141300, 121200, 229200, 259200, 155900, 154800, 90800, 165500],
+                    topChannels: [
+                        { name: "NoBorder / 溝口勇児", growth: 472000, subscribers: 498000, monthlyGrowth: [0, 0, 0, 0, 0, 0, 139000, 114000, 70000, 100000, 30000, 19000] },
+                        { name: "Naokiman Show", growth: 220000, subscribers: 2460000 },
+                        { name: "哲理学作家さとうみつろう", growth: 196000, subscribers: 731000 },
+                        { name: "コヤッキースタジオ", growth: 190000, subscribers: 1560000 },
+                        { name: "TOLAND VLOG", growth: 120000, subscribers: 912000 },
+                        { name: "羽賀ヒカル 神社チャンネル", growth: 115000, subscribers: 414000 },
+                        { name: "角由紀子のヤバイ帝国", growth: 112400, subscribers: 361000, monthlyGrowth: [0, 0, 0, 0, 0, 0, 16000, 30000, 21400, 17000, 17000, 11000] },
+                        { name: "5年後の世界", growth: 102000, subscribers: 161000, monthlyGrowth: [0, 0, 0, 0, 0, 0, 0, 30000, 25000, 25000, 21000, 1000] },
+                        { name: "秘密結社コヤミナティ", growth: 124000, subscribers: 481000 },
+                        { name: "占いTV Love Me Do", growth: 136000, subscribers: 302000 },
+                        { name: "ひすいこたろうの名言セラピー", growth: 75000, subscribers: 768000 }
+                    ]
+                },
+                {
+                    name: "コーチング", icon: "🎯", totalGrowth: 356260, channels: 8, growing: 8, declining: 0, avgGrowth: 44533,
+                    monthlyTotals: [34000, 32900, 26700, 26800, 29600, 20900, 28060, 25550, 43560, 39470, 38620, 10400],
+                    topChannels: [
+                        { name: "村主 悠真 / YUMA MURANUSHI", growth: 124000, subscribers: 161000 },
+                        { name: "Mindset Coaching Academy", growth: 106900, subscribers: 151000 },
+                        { name: "苫米地英人の銀河系アカデミア", growth: 37200, subscribers: 62900 },
+                        { name: "脳のリミッターを外すサトリ式コーチング", growth: 35700, subscribers: 44500 },
+                        { name: "ビジネスコーチングch 秦卓民", growth: 17300, subscribers: 20300 }
+                    ]
+                },
+                {
+                    name: "書籍解説", icon: "📚", totalGrowth: 312600, channels: 11, growing: 8, declining: 3, avgGrowth: 28418,
+                    monthlyTotals: [53200, 35200, 27300, 21100, 25400, 34100, 28000, 14000, 18700, 26900, 5900, 22800],
+                    topChannels: [
+                        { name: "フェルミ漫画大学", growth: 110000, subscribers: 1360000 },
+                        { name: "学識サロン", growth: 81000, subscribers: 934000 },
+                        { name: "サラタメさん", growth: 38000, subscribers: 806000 },
+                        { name: "本要約チャンネル【毎日19時更新】", growth: 30000, subscribers: 1780000 },
+                        { name: "ハッピー研究所", growth: 15000, subscribers: 224000 }
+                    ]
+                },
+                {
+                    name: "仏教・神道", icon: "⛩️", totalGrowth: 320770, channels: 12, growing: 9, declining: 3, avgGrowth: 26731,
+                    monthlyTotals: [35270, 34200, 23700, 10600, 22800, 22100, 24400, 26000, 27200, 26500, 25600, 14800],
+                    topChannels: [
+                        { name: "丸儲け住職", growth: 103170, subscribers: 117000 },
+                        { name: "三木大雲チャンネル", growth: 59000, subscribers: 440000 },
+                        { name: "大愚和尚の一問一答", growth: 52000, subscribers: 761000 },
+                        { name: "明母の樂行ライフ", growth: 41800, subscribers: 127000 },
+                        { name: "仏教に学ぶ幸福論 by 菊谷隆太", growth: 21000, subscribers: 305000 }
+                    ]
+                },
+                {
+                    name: "人生観・哲学", icon: "🎓", totalGrowth: 413640, channels: 21, growing: 17, declining: 4, avgGrowth: 19697,
+                    monthlyTotals: [16070, 21880, 22070, 23870, 24080, 17680, 60500, 55960, 44290, 51180, 42790, 21970],
+                    topChannels: [
+                        { name: "執行草舟チャンネル【公式】", growth: 57200, subscribers: 76500 },
+                        { name: "ゆとりくんチャンネル", growth: 56500, subscribers: 61100 },
+                        { name: "香心華 心明 official", growth: 55000, subscribers: 107000 },
+                        { name: "伊木ヒロシ", growth: 48000, subscribers: 297000 },
+                        { name: "むすび大学チャンネル", growth: 45000, subscribers: 674000 }
+                    ]
+                },
+                {
+                    name: "自己啓発・開運", icon: "✨", totalGrowth: 984900, channels: 63, growing: 49, declining: 14, avgGrowth: 15633,
+                    monthlyTotals: [147380, 128770, 110800, 101020, 100330, 109920, 114550, 111430, 127480, 114240, 97800, 54180],
+                    topChannels: [
+                        { name: "Paranoia_パラノイア【有益】", growth: 136000, subscribers: 364000 },
+                        { name: "きんまんの引き寄せホイホイ", growth: 105300, subscribers: 144000 },
+                        { name: "内田博史【金持ちの習慣】", growth: 92000, subscribers: 185000 },
+                        { name: "大福まめこ MIRACLE CHANNEL", growth: 43200, subscribers: 105000 },
+                        { name: "mika宇宙CH", growth: 41800, subscribers: 90600 },
+                        { name: "崔の店長日誌。", growth: 34000, subscribers: 168000 },
+                        { name: "スピリチュアル・リッチ三凛さとし", growth: 27000, subscribers: 287000 },
+                        { name: "パワースポット一人旅", growth: 46000, subscribers: 502000 },
+                        { name: "だいちゃん先生の人生開華チャンネル", growth: 21100, subscribers: 92700 },
+                        { name: "思考の学校 大石洋子", growth: 18600, subscribers: 110000 }
+                    ]
+                },
+                {
+                    name: "スピリチュアル・霊能", icon: "🔮", totalGrowth: 325910, channels: 32, growing: 19, declining: 13, avgGrowth: 10185,
+                    monthlyTotals: [45810, 58080, 42200, 30970, 23100, 33130, 32700, 28230, 24680, 16170, 22000, 9140],
+                    topChannels: [
+                        { name: "シークエンスはやともチャンネル", growth: 64000, subscribers: 495000 },
+                        { name: "プロ霊能力者チャンネル", growth: 38000, subscribers: 301000 },
+                        { name: "沖縄霊能者ユタ片山 鶴子たづこ", growth: 35000, subscribers: 172000 },
+                        { name: "えしまなおこの鳳凰ちゃんねる", growth: 23200, subscribers: 81000 },
+                        { name: "みろくマインド", growth: 22000, subscribers: 348000 }
+                    ]
+                },
+                {
+                    name: "心理", icon: "🧠", totalGrowth: 134590, channels: 14, growing: 10, declining: 4, avgGrowth: 9614,
+                    monthlyTotals: [17640, 12320, 6120, 6420, 8300, 11720, 12620, 9570, 17280, 10600, 9600, 4400],
+                    topChannels: [
+                        { name: "サイトウさんの毎日心理学チャンネル", growth: 48600, subscribers: 117000 },
+                        { name: "ココヨワチャンネル", growth: 27000, subscribers: 240000 },
+                        { name: "こころのケア研究所", growth: 14100, subscribers: 58400 },
+                        { name: "心理カウンセラー橋本翔太", growth: 14000, subscribers: 222000 },
+                        { name: "心理カウンセラー るろうに", growth: 12000, subscribers: 278000 }
+                    ]
+                },
+                {
+                    name: "宇宙人", icon: "👽", totalGrowth: 236687, channels: 31, growing: 24, declining: 7, avgGrowth: 7635,
+                    monthlyTotals: [10790, 45127, 28890, 13455, 22040, 27870, 15905, 16235, 19825, 15440, 7345, 7710],
+                    topChannels: [
+                        { name: "Spiritual mind メイの宇宙啓示", growth: 63700, subscribers: 86800 },
+                        { name: "コバシャールくんの宇宙人通信", growth: 24200, subscribers: 72700 },
+                        { name: "ルナの銀河啓示録", growth: 22400, subscribers: 68100 },
+                        { name: "宇宙アセンションラジオ", growth: 17327, subscribers: 20000 },
+                        { name: "ギンガの真理", growth: 12500, subscribers: 24600 }
+                    ]
+                },
+                {
+                    name: "ツインレイ", icon: "💫", totalGrowth: 13890, channels: 10, growing: 8, declining: 2, avgGrowth: 1389,
+                    monthlyTotals: [690, 2130, 1360, 530, 1350, 1650, 1210, 1400, 2880, 630, 420, -360],
+                    topChannels: [
+                        { name: "愛と感謝の33次元channel", growth: 5040, subscribers: 8890 },
+                        { name: "愛と笑いの宇宙法則ちゃんねる", growth: 3600, subscribers: 37700 },
+                        { name: "スピの秘密", growth: 2500, subscribers: 3950 },
+                        { name: "Sunny & Zia スピリチュアルダイアリーCH", growth: 1100, subscribers: 13500 },
+                        { name: "スピの羽【ゆっくり解説】", growth: 870, subscribers: 2540 }
+                    ]
+                }
+            ]
+        };
+
+        const sortedByAvg = [...industryData.categories].sort((a, b) => b.avgGrowth - a.avgGrowth);
+
+        function getAllChannelsRanked() {
+            const allChannels = [];
+            industryData.categories.forEach(cat => {
+                cat.topChannels.forEach(ch => {
+                    allChannels.push({ ...ch, category: cat.name, categoryIcon: cat.icon });
+                });
+            });
+            return allChannels.sort((a, b) => b.growth - a.growth);
+        }
+
+        function formatNumber(num) {
+            if (Math.abs(num) >= 10000) return (num / 10000).toFixed(1) + '万';
+            return num.toLocaleString();
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const tabId = this.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Create Category Cards
+        function createCategoryCards() {
+            const grid = document.getElementById('categoryGrid');
+            sortedByAvg.forEach((cat, index) => {
+                const growthRate = ((cat.growing / cat.channels) * 100).toFixed(0);
+                // Sort topChannels by growth descending
+                cat.topChannels.sort((a, b) => b.growth - a.growth);
+
+                const h1 = cat.monthlyTotals.slice(0, 6).reduce((a, b) => a + b, 0);
+                const h2 = cat.monthlyTotals.slice(6).reduce((a, b) => a + b, 0);
+                const trend = h2 >= h1 ? '上昇' : '下降';
+                const trendColor = h2 >= h1 ? 'var(--success)' : 'var(--coral-dark)';
+
+                const card = document.createElement('div');
+                card.className = 'category-card animate-in';
+                card.style.animationDelay = (index * 0.05) + 's';
+                card.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-icon">${cat.icon}</div>
+                        <div class="category-info"><div class="category-name">${cat.name}</div><div class="category-channels">${cat.channels}チャンネル分析</div></div>
+                        <div class="category-rank">${index + 1}</div>
+                    </div>
+                    <div class="category-stats">
+                        <div class="category-stat"><div class="category-stat-value">+${formatNumber(cat.avgGrowth)}</div><div class="category-stat-label">平均増加/ch</div></div>
+                        <div class="category-stat"><div class="category-stat-value neutral">+${formatNumber(cat.totalGrowth)}</div><div class="category-stat-label">総増加数</div></div>
+                        <div class="category-stat"><div class="category-stat-value neutral">${growthRate}%</div><div class="category-stat-label">成長率</div></div>
+                        <div class="category-stat"><div class="category-stat-value" style="color: ${trendColor};">${trend}</div><div class="category-stat-label">下半期傾向</div></div>
+                    </div>
+                    <div class="category-top-channel">
+                        <div class="top-channel-label">🏆 トップチャンネル</div>
+                        <div class="top-channel-name">${createChannelLink(cat.topChannels[0].name)}</div>
+                        <div class="top-channel-growth">+${formatNumber(cat.topChannels[0].growth)}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        createCategoryCards();
+
+        // Charts
+        function createAvgGrowthChart() {
+            const ctx = document.getElementById('avgGrowthChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedByAvg.map(d => d.icon + ' ' + d.name),
+                    datasets: [{
+                        label: '平均登録者増加数/チャンネル',
+                        data: sortedByAvg.map(d => d.avgGrowth),
+                        backgroundColor: 'rgba(196, 139, 139, 0.7)',
+                        borderColor: 'rgba(166, 107, 107, 1)',
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#FFFFFF',
+                            titleColor: '#2D2D2D',
+                            bodyColor: '#4A4A4A',
+                            borderColor: 'rgba(196, 139, 139, 0.8)',
+                            borderWidth: 2,
+                            callbacks: {
+                                label: ctx => '+' + ctx.raw.toLocaleString() + '人/チャンネル',
+                                afterLabel: ctx => `（${sortedByAvg[ctx.dataIndex].channels}チャンネル中）`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#4A4A4A', font: { weight: '600' }, callback: v => (v / 10000).toFixed(0) + '万' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                        y: { ticks: { color: '#2D2D2D', font: { size: 11, weight: '600' } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+        createAvgGrowthChart();
+
+        function createMonthlyTrendChart() {
+            const ctx = document.getElementById('monthlyTrendChart').getContext('2d');
+            const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            const monthlyTotals = new Array(12).fill(0);
+            industryData.categories.forEach(cat => cat.monthlyTotals.forEach((val, i) => monthlyTotals[i] += val));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: '月間登録者増加数',
+                        data: monthlyTotals,
+                        borderColor: 'rgba(166, 107, 107, 1)',
+                        backgroundColor: 'rgba(196, 139, 139, 0.2)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: 'rgba(166, 107, 107, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: '#FFFFFF', titleColor: '#2D2D2D', bodyColor: '#4A4A4A', callbacks: { label: ctx => '+' + ctx.raw.toLocaleString() + '人' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#4A4A4A', font: { weight: '600' } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                        y: { ticks: { color: '#4A4A4A', font: { weight: '600' }, callback: v => (v / 10000).toFixed(0) + '万' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+                    }
+                }
+            });
+        }
+        createMonthlyTrendChart();
+
+        function createHalfYearChart() {
+            const ctx = document.getElementById('halfYearChart').getContext('2d');
+            const h1Data = industryData.categories.map(cat => cat.monthlyTotals.slice(0, 6).reduce((a, b) => a + b, 0));
+            const h2Data = industryData.categories.map(cat => cat.monthlyTotals.slice(6).reduce((a, b) => a + b, 0));
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: industryData.categories.map(d => d.icon + ' ' + d.name),
+                    datasets: [
+                        { label: '上半期（1-6月）', data: h1Data, backgroundColor: 'rgba(74, 139, 91, 0.7)', borderColor: 'rgba(74, 123, 91, 1)', borderWidth: 2, borderRadius: 4 },
+                        { label: '下半期（7-12月）', data: h2Data, backgroundColor: 'rgba(196, 107, 107, 0.7)', borderColor: 'rgba(160, 75, 75, 1)', borderWidth: 2, borderRadius: 4 }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#2D2D2D', font: { weight: '600' } } },
+                        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': +' + ctx.raw.toLocaleString() + '人' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#4A4A4A', font: { weight: '600' }, callback: v => (v / 10000).toFixed(0) + '万' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                        y: { ticks: { color: '#2D2D2D', font: { size: 10, weight: '600' } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+        createHalfYearChart();
+
+        // Create Rankings
+        function createRankings() {
+            const container = document.getElementById('rankingContainer');
+            const allChannels = getAllChannelsRanked();
+
+            // Overall Top 30
+            const overallSection = document.createElement('div');
+            overallSection.className = 'ranking-section animate-in';
+            overallSection.innerHTML = `
+                <div class="ranking-title">🏆 総合ランキング TOP30</div>
+                <div class="ranking-list">
+                    ${allChannels.slice(0, 30).map((ch, i) => {
+                let rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+                return `
+                            <div class="ranking-item">
+                                <div class="ranking-position ${rankClass}">${i + 1}</div>
+                                <div class="ranking-info">
+                                    <div class="ranking-name">${createChannelLink(ch.name)}</div>
+                                    <div class="ranking-category">${ch.categoryIcon} ${ch.category}</div>
+                                </div>
+                                <div class="ranking-subs">${formatNumber(ch.subscribers)}人</div>
+                                <div class="ranking-growth">${ch.growth >= 0 ? '+' : ''}${formatNumber(ch.growth)}</div>
+                            </div>
+                        `;
+            }).join('')}
+                </div>
+            `;
+            container.appendChild(overallSection);
+
+            // Category Rankings
+            sortedByAvg.forEach((cat, catIndex) => {
+                const catSection = document.createElement('div');
+                catSection.className = 'ranking-section animate-in';
+                catSection.style.animationDelay = ((catIndex + 1) * 0.1) + 's';
+                catSection.innerHTML = `
+                    <div class="ranking-title">${cat.icon} ${cat.name} ランキング</div>
+                    <div class="ranking-list">
+                        ${cat.topChannels.sort((a, b) => b.growth - a.growth).map((ch, i) => {
+                    let rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+                    return `
+                                <div class="ranking-item">
+                                    <div class="ranking-position ${rankClass}">${i + 1}</div>
+                                    <div class="ranking-info"><div class="ranking-name">${createChannelLink(ch.name)}</div></div>
+                                    <div class="ranking-subs">${formatNumber(ch.subscribers)}人</div>
+                                    <div class="ranking-growth">${ch.growth >= 0 ? '+' : ''}${formatNumber(ch.growth)}</div>
+                                </div>
+                            `;
+                }).join('')}
+                    </div>
+                `;
+                container.appendChild(catSection);
+            });
+        }
+        createRankings();
+    </script>
+</body>
+
+</html>
